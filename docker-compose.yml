@@ -1,0 +1,22 @@
+version: "3.9"
+
+services:
+  backend:
+    build: ./backend
+    ports:
+      - "80:5000"
+    volumes:
+      - ./backend:/app
+    environment:
+      FLASK_ENV: development
+      FLASK_RUN_HOST: 0.0.0.0
+
+  frontend:
+    build: ./frontend/docker-test
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./frontend/docker-test:/user/src/app
+    depends_on:
+      - backend
+
